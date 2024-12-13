@@ -1,5 +1,6 @@
 <?php
 const FORM_ID_START = "form_id_add_";
+
 require_once "util.php";
 
 session_start();
@@ -42,7 +43,9 @@ if (isset($_POST['comprar'])) {
     if (isset($_POST['unidades']))
         $unidades = (int) $_POST['unidades'];
     $datos = consultarProducto($_POST['id']);
+
     if ($datos !== false) {
+
         //--
         //$_SESSION['cesta'][$datos->id] = $datos->id;
         //++ extra if
@@ -50,6 +53,12 @@ if (isset($_POST['comprar'])) {
             $_SESSION['cesta'][$datos['id']] += $unidades;
         } else {
             $_SESSION['cesta'][$datos['id']] = $unidades;
+        }
+
+
+        $duration = 60*60*24*30; //1 mes en segundos
+        if($datos["familia"]==IMPRES){
+            setcookie(IMPRES, 1, time() + $duration);
         }
 
 

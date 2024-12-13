@@ -1,9 +1,12 @@
 <?php
 require_once('util.php');
+require_once('conexion.php');
 session_start();
 if (!isset($_SESSION['nombre'])) {
     header('Location:login.php');
 }
+
+unset($_SESSION["cesta"]);
 ?>
 <!doctype html>
 <html lang="es">
@@ -33,6 +36,19 @@ if (!isset($_SESSION['nombre'])) {
     <p class="font-weight-bold">Pedido realizado Correctamente.</p>
     <a href="listado.php" class="btn btn-info mt-3">Hacer otra Compra</a>
 
+    <?php
+    if(isset($_COOKIE[IMPRES]) && $_COOKIE[IMPRES]==1){
+      $productos=  getProductosByFamilia(IMPRES);
+      if($productos!=null){
+            echo "<ul>";
+            foreach ($productos as $producto) {
+              //  echo "<li>".$producto['nombre']."</li>";
+                echo "<li>{$producto['nombre']}</li>";
+            }
+            echo "</ul>";
+      }
+    }
+    ?>
   
 </div>
 

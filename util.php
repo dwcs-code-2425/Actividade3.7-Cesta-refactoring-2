@@ -1,6 +1,6 @@
 <?php
 
-
+const IMPRES= 'IMPRES';
 
 function cerrarSesion(){
     //Tal y como se recomienda en https://www.php.net/manual/es/function.session-destroy.php
